@@ -1,0 +1,181 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans:
+    ui-rounded, 'SF Pro Rounded', 'Nunito', 'Segoe UI Variable', 'Segoe UI', system-ui,
+    -apple-system, sans-serif;
+
+  /* Paleta calma, infantil sem ser de bebé. */
+  --color-ink: #26283a;
+  --color-ink-soft: #5c607a;
+  --color-cloud: #f5f6fb;
+  --color-paper: #ffffff;
+
+  --color-brand-50: #eef0ff;
+  --color-brand-100: #dfe3ff;
+  --color-brand-300: #a7b0ff;
+  --color-brand-500: #5b6cff;
+  --color-brand-600: #4a58e0;
+  --color-brand-700: #3a45b4;
+
+  --color-star-50: #fff7e2;
+  --color-star-100: #ffeec2;
+  --color-star-400: #ffc63d;
+  --color-star-600: #d99400;
+
+  --color-grow-50: #e7f8f1;
+  --color-grow-100: #cdf0e2;
+  --color-grow-500: #23b183;
+  --color-grow-700: #147d5c;
+
+  --color-coin-50: #eaf6ff;
+  --color-coin-100: #d3ecff;
+  --color-coin-500: #2b9df4;
+  --color-coin-700: #1a6fb0;
+
+  --color-berry-50: #ffeef4;
+  --color-berry-500: #f4629b;
+  --color-berry-700: #c53a71;
+
+  --radius-card: 1.5rem;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    background:
+      radial-gradient(1200px 500px at 10% -10%, var(--color-brand-50), transparent 60%),
+      radial-gradient(900px 400px at 110% 0%, var(--color-star-50), transparent 55%),
+      var(--color-cloud);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  button {
+    font-family: inherit;
+    touch-action: manipulation;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-brand-500);
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  .safe-bottom {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+
+  .safe-top {
+    padding-top: max(0.75rem, env(safe-area-inset-top));
+  }
+}
+
+/* --------------------------------------------------------------- *
+ * Animações discretas (nada de exageros).
+ * --------------------------------------------------------------- */
+
+@keyframes pop-in {
+  0% {
+    transform: scale(0.96);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes star-pop {
+  0% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.25) rotate(-6deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes rise-fade {
+  0% {
+    transform: translateY(6px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes coin-drop {
+  0% {
+    transform: translateY(-40px) scale(0.7);
+    opacity: 0;
+  }
+  35% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(6px) scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(160px) rotate(220deg);
+    opacity: 0;
+  }
+}
+
+@keyframes gentle-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.animate-pop-in {
+  animation: pop-in 0.18s ease-out both;
+}
+.animate-star-pop {
+  animation: star-pop 0.45s ease-out;
+}
+.animate-rise-fade {
+  animation: rise-fade 0.25s ease-out both;
+}
+.animate-coin-drop {
+  animation: coin-drop 1s ease-in forwards;
+}
+.animate-confetti {
+  animation: confetti-fall 1.4s ease-in forwards;
+}
+.animate-float {
+  animation: gentle-float 3s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
